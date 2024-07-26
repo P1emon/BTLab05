@@ -1,9 +1,14 @@
+using EFCoreFirst.Data;
+using EFCoreFirst.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<MyDbContext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("ChuoiKetNoi")));
 var app = builder.Build();
+builder.Services.AddDbContext<EfcoreDbfirstQlbhContext>(option=>option.UseSqlServer(builder.Configuration.GetConnectionString("QLBH")));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
